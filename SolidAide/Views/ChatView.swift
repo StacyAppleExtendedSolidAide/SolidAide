@@ -7,133 +7,80 @@
 
 import SwiftUI
 import SwiftData
+import CoreLocation
 
 struct ChatView: View {
-    //@Environment(\.modelContext) private var modelContext
     @Query private var profiles: [ProfileClass]
     @Query private var chats: [ChatClass]
-    
+
     @State private var messageType = "Tous"
-    @State private var searchMessages: String = ""
+    @State private var searchMessages = ""
     let status = ["Tous", "Non Lus", "Favoris"]
 
-    var currentUserId: UUID? {
-        profiles.first(where: { $0.pseudo == "Marie D." })?.userId.id
+    // Helper pour récupérer le profil courant (exemple “Marie D.”)
+    private var currentProfile: ProfileClass? {
+        profiles.first { $0.pseudo == "Marie D." }
     }
-        
-    var filteredProfiles: [ProfileClass] {
+
+    // Filtrage selon le type de message
+    private var filteredProfiles: [ProfileClass] {
         switch messageType {
         case "Tous":
             return profiles
         case "Non Lus":
             return profiles.filter { profile in
-                chats.contains { chat in
-            (chat.sender.id == profile.userId.id ||
-            chat.recipient.id == profile.userId.id) &&
-            chat.isRead == false
-                    }
+                guard let pid = profile.userId?.id else { return false }
+                return chats.contains {
+                    ($0.sender.id == pid || $0.recipient.id == pid) && !$0.isRead
                 }
+            }
         case "Favoris":
-            // filtre les profiles favoris de l'user
-            guard let currentUserId = currentUserId else { return [] }
-                
-            // trouve le profil de l'user
-            guard let myProfile = profiles.first(where: { $0.userId.id == currentUserId }) else {
-                    return []
-                }
-            // Retroune les users favoris
+            guard let favIds = currentProfile?.favorite?.map({ $0.id }) else { return [] }
             return profiles.filter { profile in
-                myProfile.favorite?.contains(where: { $0.id == profile.userId.id }) ?? false
+                if let uid = profile.userId?.id {
+                    return favIds.contains(uid)
                 }
-            default:
-                return profiles
+                return false
+            }
+        default:
+            return profiles
+        }
+    }
+
+    // Recherche texte
+    private var displayedProfiles: [ProfileClass] {
+        if searchMessages.isEmpty {
+            return filteredProfiles
+        } else {
+            return filteredProfiles.filter {
+                $0.pseudo.localizedCaseInsensitiveContains(searchMessages)
             }
         }
-    
-    private var searchContact: [ProfileClass]{
-         if searchMessages.isEmpty {
-             return filteredProfiles} else{
-                 return filteredProfiles.filter {
-                $0.pseudo.localizedCaseInsensitiveContains(searchMessages)}
-             }
-     }
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 Picker("Type", selection: $messageType) {
-                    ForEach(status, id: \.self) {
-                        Text($0)
-                    }
-                  
+                    ForEach(status, id: \.self) { Text($0) }
                 }
                 .pickerStyle(.segmented)
                 .padding()
-                
+
                 Divider()
-                
+
                 ScrollView {
-                    ForEach(searchContact) { contactInfo in
-                        HStack(alignment: .top, spacing: 20) {
-                            ZStack {
-                                Circle()
-                                    .frame(width: 70, height: 70)
-                                    .foregroundStyle(.deepBlue)
-                                Image(contactInfo.imageURL ?? "")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 60, height: 60)
-                                    .clipShape(Circle())
-                            }
-                            
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(contactInfo.pseudo)
-                                    .font(.headline)
-                                
-                                if let chat = chats
-                                                .filter({
-                                                    $0.sender.id == contactInfo.userId.id ||
-                                                    $0.recipient.id == contactInfo.userId.id
-                                                })
-                                                .sorted(by: { $0.dateTime > $1.dateTime })  
-                                                .first {
-                                                
-                                                Text(chat.message)
-                                                    .italic()
-                                                    .foregroundColor(.gray)
-                                                    .lineLimit(1)
-                                            } else {
-                                                Text("Aucun message")
-                                                    .italic()
-                                                    .foregroundColor(.gray)
-                                            }
-                                        }
-                            
-                            Spacer()
-                            
-                            if let chat = chats
-                                     .filter({
-                                         $0.sender.id == contactInfo.userId.id ||
-                                         $0.recipient.id == contactInfo.userId.id
-                                     })
-                                     .sorted(by: { $0.dateTime > $1.dateTime })
-                                     .first {
-                                     
-                                     Text(chat.dateTime, style: .time)
-                                         .font(.caption)
-                                         .foregroundColor(.gray)
-                                 }
-                             }
-                        .padding(10)
-                        
-                        Divider()
+                    ForEach(displayedProfiles, id: \.self) { contact in
+                        // … ton UI de contact …
                     }
                 }
             }
             .navigationTitle("Messagerie")
-            .searchable(text: $searchMessages, placement: .navigationBarDrawer(displayMode: .always), prompt: "Rechercher un contact")
+            .searchable(text: $searchMessages,
+                        placement: .navigationBarDrawer(displayMode: .always),
+                        prompt: "Rechercher un contact")
         }
     }
-    
 }
     
 

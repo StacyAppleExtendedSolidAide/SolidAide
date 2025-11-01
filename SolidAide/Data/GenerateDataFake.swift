@@ -4,7 +4,7 @@
 //
 //  Created by apprenant78 on 29/10/2025.
 //
-
+import CoreLocation
 import Foundation
 import SwiftData
 
@@ -246,7 +246,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .cooking,
             serviceDescription: "Cours de cuisine française traditionnelle - Apprenez à préparer un coq au vin et une tarte tatin !",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8566, longitude: 2.3522, altitude: 35.0),
+            position: GPSCoordinateStruct(latitude: 48.8566, longitude: 2.3522, /*altitude: 35.0*/),
             isFree: false,
             timeSpent: 3,
             startDate: Calendar.current.date(byAdding: .month, value: 3, to: Date()) ?? Date()
@@ -256,7 +256,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .DIY,
             serviceDescription: "Réparation de petits meubles et montage IKEA. J'apporte mes outils !",
             city: "Marseille",
-            position: GPSCoordinateStruct(latitude: 48.8606, longitude: 2.3376, altitude: 33.0),
+            position: GPSCoordinateStruct(latitude: 48.8606, longitude: 2.3376, /*altitude: 33.0*/),
             isFree: false,
             timeSpent: 3,
             startDate: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
@@ -266,7 +266,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .digital,
             serviceDescription: "Aide à la configuration d'ordinateur, smartphone, tablette. Installation de logiciels et explications.",
             city: "Lille",
-            position: GPSCoordinateStruct(latitude: 48.8656, longitude: 2.3212, altitude: 38.0),
+            position: GPSCoordinateStruct(latitude: 48.8656, longitude: 2.3212, /*altitude: 38.0*/),
             isFree: false,
             timeSpent: 1,
             startDate: Date()
@@ -277,7 +277,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .dogWalk,
             serviceDescription: "Promenade quotidienne pour votre chien. Je suis habitué aux grands et petits chiens.",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8466, longitude: 2.3622, altitude: 32.0),
+            position: GPSCoordinateStruct(latitude: 48.8466, longitude: 2.3622, /*altitude: 32.0*/),
             isFree: false,
             timeSpent: 1,
             startDate: Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date(),
@@ -293,7 +293,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .shopping,
             serviceDescription: "Courses au supermarché pour personnes à mobilité réduite ou débordées. Je peux livrer chez vous.",
             city: "Aniche",
-            position: GPSCoordinateStruct(latitude: 48.8766, longitude: 2.3422, altitude: 36.0),
+            position: GPSCoordinateStruct(latitude: 48.8766, longitude: 2.3422, /*altitude: 36.0*/),
             isFree: false,
             timeSpent: 2,
             startDate: Calendar.current.date(byAdding: .day, value: 3, to: Date()) ?? Date(),
@@ -309,7 +309,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .moving,
             serviceDescription: "Déménagement complet avec camion 20m³. Aide au chargement et déchargement.",
             city: "Toulouse",
-            position: GPSCoordinateStruct(latitude: 48.8366, longitude: 2.3722, altitude: 34.0),
+            position: GPSCoordinateStruct(latitude: 48.8366, longitude: 2.3722, /*altitude: 34.0*/),
             isFree: false,
             timeSpent: 6,
             startDate: Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date(),
@@ -325,7 +325,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .sewing,
             serviceDescription: "Retouches de vêtements : ourlets, fermetures éclair, ajustements. Travail soigné garanti !",
             city: "Nice",
-            position: GPSCoordinateStruct(latitude: 48.8666, longitude: 2.3522, altitude: 37.0),
+            position: GPSCoordinateStruct(latitude: 48.8666, longitude: 2.3522, /*altitude: 37.0*/),
             isFree: false,
             timeSpent: 1,
             startDate: Calendar.current.date(byAdding: .day, value: 5, to: Date()) ?? Date(),
@@ -341,7 +341,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .trainingCourses,
             serviceDescription: "Formation Word, Excel et PowerPoint pour débutants. Séances individuelles adaptées à votre rythme.",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8466, longitude: 2.3322, altitude: 35.0),
+            position: GPSCoordinateStruct(latitude: 48.8466, longitude: 2.3322, /*altitude: 35.0*/),
             isFree: false,
             timeSpent: 2,
             startDate: Calendar.current.date(byAdding: .day, value: 4, to: Date()) ?? Date(),
@@ -353,7 +353,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .householdTasks,
             serviceDescription: "Ménage complet : aspirateur, serpillère, dépoussiérage. Produits écologiques fournis.",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8566, longitude: 2.3522, altitude: 35.0),
+            position: GPSCoordinateStruct(latitude: 48.8566, longitude: 2.3522, /*altitude: 35.0*/),
             isFree: false,
             timeSpent: 3,
             startDate: Calendar.current.date(byAdding: .day, value: 6, to: Date()) ?? Date(),
@@ -365,7 +365,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .homeworkSupport,
             serviceDescription: "Soutien scolaire en mathématiques niveau collège et lycée. Préparation aux examens.",
             city: "Lille",
-            position: GPSCoordinateStruct(latitude: 48.8656, longitude: 2.3212, altitude: 38.0),
+            position: GPSCoordinateStruct(latitude: 48.8656, longitude: 2.3212, /*altitude: 38.0*/),
             isFree: false,
             timeSpent: 2,
             startDate: Calendar.current.date(byAdding: .day, value: -3, to: Date()) ?? Date(),
@@ -380,7 +380,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .lending,
             serviceDescription: "Prêt de perceuse-visseuse sans fil et coffret de mèches. À récupérer chez moi.",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8606, longitude: 2.3376, altitude: 33.0),
+            position: GPSCoordinateStruct(latitude: 48.8606, longitude: 2.3376, /*altitude: 33.0*/),
             isFree: true,
             timeSpent: 0,
             startDate: Date()
@@ -390,7 +390,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .carSharing,
             serviceDescription: "Covoiturage Paris-Lyon ce week-end. 3 places disponibles. Départ samedi 8h.",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8466, longitude: 2.3622, altitude: 32.0),
+            position: GPSCoordinateStruct(latitude: 48.8466, longitude: 2.3622, /*altitude: 32.0*/),
             isFree: false,
             timeSpent: 4,
             startDate: Calendar.current.date(byAdding: .day, value: 2, to: Date()) ?? Date()
@@ -400,7 +400,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .administrative,
             serviceDescription: "Aide aux démarches administratives : CAF, impôts, Sécurité sociale. Je vous accompagne dans vos papiers.",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8766, longitude: 2.3422, altitude: 36.0),
+            position: GPSCoordinateStruct(latitude: 48.8766, longitude: 2.3422, /*altitude: 36.0*/),
             isFree: false,
             timeSpent: 1,
             startDate: Calendar.current.date(byAdding: .day, value: 8, to: Date()) ?? Date()
@@ -410,7 +410,7 @@ func GenerateDataBaseFunc(context: ModelContext) {
             skill: .pets,
             serviceDescription: "Garde de chat à mon domicile pendant vos vacances. J'ai l'habitude des félins !",
             city: "Paris",
-            position: GPSCoordinateStruct(latitude: 48.8666, longitude: 2.3522, altitude: 37.0),
+            position: GPSCoordinateStruct(latitude: 48.8666, longitude: 2.3522, /*altitude: 37.0*/),
             isFree: false,
             timeSpent: 24,
             startDate: Calendar.current.date(byAdding: .day, value: 15, to: Date()) ?? Date()
